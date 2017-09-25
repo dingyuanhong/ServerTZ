@@ -1,0 +1,727 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>php</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- Powered by: Yahei.Net -->
+    <style type="text/css">
+        * {
+            font-family: "Microsoft Yahei", Tahoma, Arial;
+        }
+        
+        body {
+            text-align: center;
+            margin: 0 auto;
+            padding: 0;
+            background-color: #fafafa;
+            font-size: 12px;
+            font-family: Tahoma, Arial
+        }
+        
+        h1 {
+            font-size: 26px;
+            padding: 0;
+            margin: 0;
+            color: #333333;
+            font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+        }
+        
+        h1 small {
+            font-size: 11px;
+            font-family: Tahoma;
+            font-weight: bold;
+        }
+        
+        a {
+            color: #666;
+            text-decoration: none;
+        }
+        
+        a.black {
+            color: #000000;
+            text-decoration: none;
+        }
+        
+        table {
+            width: 100%;
+            clear: both;
+            padding: 0;
+            margin: 0 0 10px;
+            border-collapse: collapse;
+            border-spacing: 0;
+            box-shadow: 1px 1px 1px #CCC;
+            -moz-box-shadow: 1px 1px 1px #CCC;
+            -webkit-box-shadow: 1px 1px 1px #CCC;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=2, Direction=135, Color='#CCCCCC')";
+        }
+        
+        th {
+            padding: 3px 6px;
+            font-weight: bold;
+            background: #dedede;
+            color: #626262;
+            border: 1px solid #cccccc;
+            text-align: left;
+        }
+        
+        tr {
+            padding: 0;
+            background: #FFFFFF;
+        }
+        
+        td {
+            padding: 3px 6px;
+            border: 1px solid #CCCCCC;
+        }
+        
+        .w_logo {
+            height: 25px;
+            text-align: center;
+            color: #333;
+            FONT-SIZE: 15px;
+            width: 13%;
+        }
+        
+        .w_top {
+            height: 25px;
+            text-align: center;
+            width: 8.7%;
+        }
+        
+        .w_top:hover {
+            background: #dadada;
+        }
+        
+        .w_foot {
+            height: 25px;
+            text-align: center;
+            background: #dedede;
+        }
+        
+        input {
+            padding: 2px;
+            background: #FFFFFF;
+            border-top: 1px solid #666666;
+            border-left: 1px solid #666666;
+            border-right: 1px solid #CCCCCC;
+            border-bottom: 1px solid #CCCCCC;
+            font-size: 12px
+        }
+        
+        input.btn {
+            font-weight: bold;
+            height: 20px;
+            line-height: 20px;
+            padding: 0 6px;
+            color: #666666;
+            background: #f2f2f2;
+            border: 1px solid #999;
+            font-size: 12px
+        }
+        
+        .bar {
+            border: 1px solid #999999;
+            background: #FFFFFF;
+            height: 5px;
+            font-size: 2px;
+            width: 89%;
+            margin: 2px 0 5px 0;
+            padding: 1px;
+            overflow: hidden;
+        }
+        
+        .bar_1 {
+            border: 1px dotted #999999;
+            background: #FFFFFF;
+            height: 5px;
+            font-size: 2px;
+            width: 89%;
+            margin: 2px 0 5px 0;
+            padding: 1px;
+            overflow: hidden;
+        }
+        
+        .barli_red {
+            background: #ff6600;
+            height: 5px;
+            margin: 0px;
+            padding: 0;
+        }
+        
+        .barli_blue {
+            background: #0099FF;
+            height: 5px;
+            margin: 0px;
+            padding: 0;
+        }
+        
+        .barli_green {
+            background: #36b52a;
+            height: 5px;
+            margin: 0px;
+            padding: 0;
+        }
+        
+        .barli_black {
+            background: #333;
+            height: 5px;
+            margin: 0px;
+            padding: 0;
+        }
+        
+        .barli_1 {
+            background: #999999;
+            height: 5px;
+            margin: 0px;
+            padding: 0;
+        }
+        
+        .barli {
+            background: #36b52a;
+            height: 5px;
+            margin: 0px;
+            padding: 0;
+        }
+        
+        #page {
+            width: 960px;
+            padding: 0 auto;
+            margin: 0 auto;
+            text-align: left;
+        }
+        
+        #header {
+            position: relative;
+            padding: 5px;
+        }
+        
+        .w_small {
+            font-family: Courier New;
+        }
+        
+        .w_number {
+            color: #f800fe;
+        }
+        
+        .sudu {
+            padding: 0;
+            background: #5dafd1;
+        }
+        
+        .suduk {
+            margin: 0px;
+            padding: 0;
+        }
+        
+        .resYes {}
+        
+        .resNo {
+            color: #FF0000;
+        }
+        
+        .word {
+            word-break: break-all;
+        }
+    </style>
+
+    <script language="JavaScript" type="text/javascript" src="jquery.min.js"></script>
+
+    <script type="text/javascript">
+        function SetHTML(obj, value, success) {
+            if (value == '×') {
+                obj.html("<font color=red>" + value + "</font>");
+            } else {
+                obj.html(success);
+            }
+        }
+
+        function SetHTML_Font(obj, value) {
+            if (value == '×') {
+                obj.html("<font color=red>" + value + "</font>");
+            } else {
+                obj.html("<font color=green>" + value + "</font>");
+            }
+        }
+        $(document).ready(function() {
+            getPhpConfigure();
+            $("[type=submit]").each(function(i) {
+                this.onclick = this.onsubmit = function() {
+                    var url = 'PhpConfigure.php?' + $(this).attr('name') + '=' + $(this).attr('value');
+                    var child = $(this).attr('child');
+                    var arrChild = child.split(' ');
+                    for (var i = 0; i < arrChild.length; i++) {
+                        var name = arrChild[i];
+                        var value = $('[name=' + name + ']').val();
+                        url += '&' + name + '=' + value;
+                    }
+                    $.get(url, function(data, status) {
+                        alert(data);
+                    });
+                    return false;
+                }
+            });
+        });
+
+        function getPhpConfigure() {
+            $.getJSON('PhpConfigure.php?act=extensions', function(dataJson) {
+                $("[name='w_top'] td[name]").each(function(i) {
+                    var strExtensions = '<span class="w_small" >';
+                    for (var i = 0; i < dataJson.length; i++) {
+                        strExtensions += dataJson[i] + '&nbsp;&nbsp;';
+                        if (i != 0 && i % 13 == 0) {
+                            strExtensions += '<br />';
+                        }
+                    }
+                    strExtensions += '</span>';
+                    $(this).html(strExtensions);
+                });
+            });
+            $.getJSON('PhpConfigure.php?act=configure', function(dataJson) {
+                $("[name='w_php_table'] td[name]").each(function(i) {
+                    var name = $(this).attr('name');
+                    if (dataJson[name] == undefined) return;
+                    if (name == 'phpinfo') {
+                        SetHTML($(this), dataJson[name], "<a href='PhpConfigure.php?act=phpinfo' target='_blank'>PHPINFO</a>");
+                    } else if (name == 'default_functions') {
+                        SetHTML($(this), dataJson[name], "<a href='PhpConfigure.php?act=default_functions' target='_blank' class='static'>请点这里查看详细！</a>");
+                    } else if (name == 'disable_finctions') {
+                        SetHTML($(this), dataJson[name], "<a href='PhpConfigure.php?act=disable_finctions' target='_blank' class='static'>请点这里查看详细！</a>");
+                    } else if ('max_execution_time' == name ||
+                        'default_socket_timeout' == name) {
+                        SetHTML($(this), dataJson[name], dataJson[name] + '秒');
+                    } else {
+                        SetHTML_Font($(this), dataJson[name]);
+                    }
+                });
+            });
+            $.getJSON('PhpConfigure.php?act=assembly', function(dataJson) {
+                $("[name='w_module'] td[name]").each(function(i) {
+                    // console.log(this.getAttribute("name"));
+                    var name = $(this).attr('name');
+                    SetHTML_Font($(this), dataJson[name]);
+                });
+            });
+            $.getJSON('PhpConfigure.php?act=trd', function(dataJson) {
+                $("[name='w_module_other'] td[name]").each(function(i) {
+                    // console.log(this.getAttribute("name"));
+                    var name = $(this).attr('name');
+                    SetHTML_Font($(this), dataJson[name]);
+                });
+            });
+            $.getJSON('PhpConfigure.php?act=db', function(dataJson) {
+                $("[name='w_db'] td[name]").each(function(i) {
+                    // console.log(this.getAttribute("name"));
+                    var name = $(this).attr('name');
+                    SetHTML_Font($(this), dataJson[name]);
+                });
+            });
+        }
+
+        function ForDight(Dight, How) {
+            if (Dight < 0) {
+                var Last = 0 + "B/s";
+            } else if (Dight < 1024) {
+                var Last = Math.round(Dight * Math.pow(10, How)) / Math.pow(10, How) + "B";
+            } else if (Dight < 1048576) {
+                Dight = Dight / 1024;
+                var Last = Math.round(Dight * Math.pow(10, How)) / Math.pow(10, How) + "KB";
+            } else if (Dight < 1073741824) {
+                Dight = Dight / 1048576;
+                var Last = Math.round(Dight * Math.pow(10, How)) / Math.pow(10, How) + "MB";
+            } else {
+                Dight = Dight / 1073741824;
+                var Last = Math.round(Dight * Math.pow(10, How)) / Math.pow(10, How) + "GB";
+            }
+            return Last;
+        }
+    </script>
+
+</head>
+
+<body>
+    <a name="w_top"></a>
+    <div id="page">
+        <table width="100%" cellpadding="3" cellspacing="0" align="center" name="w_top">
+            <tr>
+                <th colspan="4">PHP已编译模块检测</th>
+            </tr>
+            <tr>
+                <td colspan="4" name=extensions>
+                </td>
+            </tr>
+        </table>
+
+        <a name="w_php"></a>
+        <table name="w_php_table">
+            <tr>
+                <th colspan="4">PHP相关参数</th>
+            </tr>
+            <tr>
+                <td width="32%">PHP信息（phpinfo）：</td>
+                <td width="18%" name=phpinfo></td>
+                <td width="32%">PHP版本（php_version）：</td>
+                <td width="18%" name=php_version></td>
+            </tr>
+
+            <tr>
+                <td>PHP运行方式：</td>
+                <td name=runtype></td>
+                <td>脚本占用最大内存（memory_limit）：</td>
+                <td name=memory_limit></td>
+            </tr>
+
+            <tr>
+                <td>PHP安全模式（safe_mode）：</td>
+                <td name=safe_mode></td>
+                <td>POST方法提交最大限制（post_max_size）：</td>
+                <td name=post_max_size></td>
+            </tr>
+
+            <tr>
+                <td>上传文件最大限制（upload_max_filesize）：</td>
+                <td name=upload_max_filesize></td>
+                <td>浮点型数据显示的有效位数（precision）：</td>
+                <td name=precision></td>
+            </tr>
+
+            <tr>
+                <td>脚本超时时间（max_execution_time）：</td>
+                <td name=max_execution_time></td>
+                <td>socket超时时间（default_socket_timeout）：</td>
+                <td name=default_socket_timeout></td>
+            </tr>
+
+            <tr>
+                <td>PHP页面根目录（doc_root）：</td>
+                <td name=doc_root></td>
+                <td>用户根目录（user_dir）：</td>
+                <td name=user_dir></td>
+            </tr>
+
+            <tr>
+                <td>dl()函数（enable_dl）：</td>
+                <td name=enable_dl></td>
+                <td>指定包含文件目录（include_path）：</td>
+                <td name=include_path></td>
+            </tr>
+
+            <tr>
+                <td>显示错误信息（display_errors）：</td>
+                <td name=display_errors></td>
+                <td>自定义全局变量（register_globals）：</td>
+                <td name=register_globals></td>
+            </tr>
+
+            <tr>
+                <td>数据反斜杠转义（magic_quotes_gpc）：</td>
+                <td name=magic_quotes_gpc></td>
+                <td>"&lt;?...?&gt;"短标签（short_open_tag）：</td>
+                <td name=short_open_tag></td>
+            </tr>
+
+            <tr>
+                <td>"&lt;% %&gt;"ASP风格标记（asp_tags）：</td>
+                <td name=asp_tags></td>
+                <td>忽略重复错误信息（ignore_repeated_errors）：</td>
+                <td name=ignore_repeated_errors></td>
+            </tr>
+
+            <tr>
+                <td>忽略重复的错误源（ignore_repeated_source）：</td>
+                <td name=ignore_repeated_source></td>
+                <td>报告内存泄漏（report_memleaks）：</td>
+                <td name=report_memleaks></td>
+            </tr>
+
+            <tr>
+                <td>自动字符串转义（magic_quotes_gpc）：</td>
+                <td name=auto_magic_quotes_gpc></td>
+                <td>外部字符串自动转义（magic_quotes_runtime）：</td>
+                <td name=magic_quotes_runtime></td>
+            </tr>
+
+            <tr>
+                <td>打开远程文件（allow_url_fopen）：</td>
+                <td name=allow_url_fopen></td>
+                <td>声明argv和argc变量（register_argc_argv）：</td>
+                <td name=register_argc_argv></td>
+            </tr>
+
+            <tr>
+                <td>Cookie 支持：</td>
+                <td name=cookie></td>
+                <td>拼写检查（ASpell Library）：</td>
+                <td name=aspell_check_raw></td>
+            </tr>
+
+            <tr>
+                <td>高精度数学运算（BCMath）：</td>
+                <td name=BCMath></td>
+                <td>PREL相容语法（PCRE）：</td>
+                <td name=preg_match></td>
+            </tr>
+
+            <tr>
+
+                <td>PDF文档支持：</td>
+                <td name=pdf_close></td>
+                <td>SNMP网络管理协议：</td>
+                <td name=snmpget></td>
+            </tr>
+
+            <tr>
+                <td>VMailMgr邮件处理：</td>
+                <td name=vm_adduser></td>
+                <td>Curl支持：</td>
+                <td name=curl_init></td>
+            </tr>
+
+            <tr>
+                <td>SMTP支持：</td>
+                <td name=SMTP></td>
+                <td>SMTP地址：</td>
+                <td name=SMTP_Addr></td>
+            </tr>
+
+            <tr>
+                <td>默认支持函数（enable_functions）：</td>
+                <td colspan="3" name=default_functions></td>
+            </tr>
+
+            <tr>
+                <td>被禁用的函数（disable_functions）：</td>
+                <td colspan="3" class="word" name=disable_finctions></td>
+            </tr>
+        </table>
+
+        <a name="w_module"></a>
+        <!--组件信息-->
+        <table name="w_module">
+
+            <tr>
+                <th colspan="4">组件支持</th>
+            </tr>
+
+            <tr>
+                <td width="32%">FTP支持：</td>
+                <td width="18%" name=ftp_login></td>
+                <td width="32%">XML解析支持：</td>
+                <td width="18%" name=xml_set_object>
+                    <?php echo isfun("xml_set_object");?>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Session支持：</td>
+                <td name=session_start></td>
+                <td>Socket支持：</td>
+                <td name=socket_accept></td>
+            </tr>
+
+            <tr>
+                <td>Calendar支持</td>
+                <td name=cal_days_in_month></td>
+                <td>允许URL打开文件：</td>
+                <td name=allow_url_fopen name=allow_url_fopen></td>
+            </tr>
+
+            <tr>
+                <td>GD库支持：</td>
+                <td name=gd></td>
+                <td>压缩文件支持(Zlib)：</td>
+                <td name=gzclose></td>
+            </tr>
+
+            <tr>
+                <td>IMAP电子邮件系统函数库：</td>
+                <td name=imap_close></td>
+                <td>历法运算函数库：</td>
+                <td name=JDToGregorian></td>
+            </tr>
+
+            <tr>
+                <td>正则表达式函数库：</td>
+                <td name=preg_match></td>
+                <td>WDDX支持：</td>
+                <td name=wddx_add_vars></td>
+            </tr>
+
+            <tr>
+                <td>Iconv编码转换：</td>
+                <td name=iconv></td>
+                <td>mbstring：</td>
+                <td name=mb_eregi></td>
+            </tr>
+
+            <tr>
+                <td>高精度数学运算：</td>
+                <td name=bcadd></td>
+                <td>LDAP目录协议：</td>
+                <td name=ldap_close></td>
+            </tr>
+
+            <tr>
+                <td>MCrypt加密处理：</td>
+                <td name=mcrypt_cbc></td>
+                <td>哈稀计算：</td>
+                <td name=mhash_count></td>
+            </tr>
+
+        </table>
+
+        <a name="w_module_other"></a>
+        <!--第三方组件信息-->
+        <table name=w_module_other>
+            <tr>
+                <th colspan="4">第三方组件</th>
+            </tr>
+            <tr>
+                <td width="32%">Zend版本</td>
+                <td width="18%" name=zend_version></td>
+                <td width="32%" name=zend_name></td>
+                <td width="18%" name=zend_enable></td>
+            </tr>
+            <tr>
+                <td>eAccelerator</td>
+                <td name=eAccelerator></td>
+                <td>ioncube</td>
+                <td name=ioncube></td>
+            </tr>
+            <tr>
+                <td>XCache</td>
+                <td name=XCache></td>
+                <td>APC</td>
+                <td name=APC></td>
+            </tr>
+        </table>
+
+        <a name="w_db"></a>
+        <!--数据库支持-->
+        <table name="w_db">
+
+            <tr>
+                <th colspan="4">数据库支持</th>
+            </tr>
+            <tr>
+                <td width="32%">MySQL 数据库：</td>
+                <td width="18%" name=mysql></td>
+                <td width="32%">ODBC 数据库：</td>
+                <td width="18%" name=odbc_close></td>
+            </tr>
+
+            <tr>
+                <td>Oracle 数据库：</td>
+                <td name=ora_close></td>
+                <td>SQL Server 数据库：</td>
+                <td name=mssql_close></td>
+            </tr>
+
+            <tr>
+                <td>dBASE 数据库：</td>
+                <td name=dbase_close></td>
+                <td>mSQL 数据库：</td>
+                <td name=msql_close></td>
+            </tr>
+
+            <tr>
+                <td>SQLite 数据库：</td>
+                <td name=SQLite></td>
+                <td>Hyperwave 数据库：</td>
+                <td name=Hyperwave></td>
+            </tr>
+
+            <tr>
+                <td>Postgre SQL 数据库：</td>
+                <td name=PostgreSQL></td>
+                <td>Informix 数据库：</td>
+                <td name=Informix></td>
+            </tr>
+
+            <tr>
+                <td>DBA 数据库：</td>
+                <td name=DBA></td>
+                <td>DBM 数据库：</td>
+                <td name=DBM></td>
+            </tr>
+
+            <tr>
+                <td>FilePro 数据库：</td>
+                <td name=FilePro></td>
+                <td>SyBase 数据库：</td>
+                <td name=SyBase></td>
+            </tr>
+        </table>
+
+        <form>
+            <a name="w_MySQL"></a>
+            <!--MySQL数据库连接检测-->
+            <table>
+                <tr>
+                    <th colspan="3">MySQL数据库连接检测</th>
+                </tr>
+                <tr>
+                    <td width="15%"></td>
+                    <td width="60%">
+                        地址：<input type="text" name="host" value="localhost" size="10" /> 端口：
+                        <input type="text" name="port" value="3306" size="10" /> 用户名：
+                        <input type="text" name="login" size="10" /> 密码：
+                        <input type="password" name="password" size="10" />
+                    </td>
+                    <td width="25%">
+                        <input class="btn" type="submit" name="act" value="sqlTest" child="host port login password" />
+                    </td>
+                </tr>
+
+            </table>
+
+            <a name="w_function"></a>
+            <!--函数检测-->
+            <table>
+                <tr>
+                    <th colspan="3">函数检测</th>
+                </tr>
+                <tr>
+                    <td width="15%"></td>
+                    <td width="60%">
+                        请输入您要检测的函数：
+                        <input type="text" name="funcName" size="50" />
+                    </td>
+                    <td width="25%">
+                        <input class="btn" type="submit" name="act" align="right" value="functionTest" child="funcName" />
+                    </td>
+                </tr>
+            </table>
+            <a name="w_mail"></a>
+            <!--邮件发送检测-->
+            <table>
+                <tr>
+                    <th colspan="3">邮件发送检测</th>
+                </tr>
+                <tr>
+                    <td width="15%"></td>
+                    <td width="60%">
+                        请输入您要检测的邮件地址：
+                        <input type="text" name="mailAdd" size="50" />
+                    </td>
+                    <td width="25%">
+                        <input class="btn" type="submit" name="act" value="mailTest" child="mailAdd" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+        <table>
+            <tr>
+                <td class="w_foot">
+                    <A HREF="http://www.Yahei.Net" target="_blank">转载自:雅黑PHP探针</A>
+                </td>
+                <td class="w_foot"></td>
+                <td class="w_foot"><a href="#w_top">返回顶部</a></td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

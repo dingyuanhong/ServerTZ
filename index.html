@@ -1,0 +1,794 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>server</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- Powered by: Yahei.Net -->
+    <style type="text/css">
+        * {
+            font-family: "Microsoft Yahei", Tahoma, Arial;
+        }
+        
+        body {
+            text-align: center;
+            margin: 0 auto;
+            padding: 0;
+            background-color: #fafafa;
+            font-size: 12px;
+            font-family: Tahoma, Arial
+        }
+        
+        h1 {
+            font-size: 26px;
+            padding: 0;
+            margin: 0;
+            color: #333333;
+            font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+        }
+        
+        h1 small {
+            font-size: 11px;
+            font-family: Tahoma;
+            font-weight: bold;
+        }
+        
+        a {
+            color: #666;
+            text-decoration: none;
+        }
+        
+        a.black {
+            color: #000000;
+            text-decoration: none;
+        }
+        
+        table {
+            width: 100%;
+            clear: both;
+            padding: 0;
+            margin: 0 0 10px;
+            border-collapse: collapse;
+            border-spacing: 0;
+            box-shadow: 1px 1px 1px #CCC;
+            -moz-box-shadow: 1px 1px 1px #CCC;
+            -webkit-box-shadow: 1px 1px 1px #CCC;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=2, Direction=135, Color='#CCCCCC')";
+        }
+        
+        th {
+            padding: 3px 6px;
+            font-weight: bold;
+            background: #dedede;
+            color: #626262;
+            border: 1px solid #cccccc;
+            text-align: left;
+        }
+        
+        tr {
+            padding: 0;
+            background: #FFFFFF;
+        }
+        
+        td {
+            padding: 3px 6px;
+            border: 1px solid #CCCCCC;
+        }
+        
+        .w_logo {
+            height: 25px;
+            text-align: center;
+            color: #333;
+            FONT-SIZE: 15px;
+            width: 13%;
+        }
+        
+        .w_top {
+            height: 25px;
+            text-align: center;
+            width: 8.7%;
+        }
+        
+        .w_top:hover {
+            background: #dadada;
+        }
+        
+        .w_foot {
+            height: 25px;
+            text-align: center;
+            background: #dedede;
+        }
+        
+        input {
+            padding: 2px;
+            background: #FFFFFF;
+            border-top: 1px solid #666666;
+            border-left: 1px solid #666666;
+            border-right: 1px solid #CCCCCC;
+            border-bottom: 1px solid #CCCCCC;
+            font-size: 12px
+        }
+        
+        input.btn {
+            font-weight: bold;
+            height: 20px;
+            line-height: 20px;
+            padding: 0 6px;
+            color: #666666;
+            background: #f2f2f2;
+            border: 1px solid #999;
+            font-size: 12px
+        }
+        
+        .bar {
+            border: 1px solid #999999;
+            background: #FFFFFF;
+            height: 5px;
+            font-size: 2px;
+            width: 89%;
+            margin: 2px 0 5px 0;
+            padding: 1px;
+            overflow: hidden;
+        }
+        
+        .bar_1 {
+            border: 1px dotted #999999;
+            background: #FFFFFF;
+            height: 5px;
+            font-size: 2px;
+            width: 89%;
+            margin: 2px 0 5px 0;
+            padding: 1px;
+            overflow: hidden;
+        }
+        
+        .barli_red {
+            background: #ff6600;
+            height: 5px;
+            margin: 0px;
+            padding: 0;
+        }
+        
+        .barli_blue {
+            background: #0099FF;
+            height: 5px;
+            margin: 0px;
+            padding: 0;
+        }
+        
+        .barli_green {
+            background: #36b52a;
+            height: 5px;
+            margin: 0px;
+            padding: 0;
+        }
+        
+        .barli_black {
+            background: #333;
+            height: 5px;
+            margin: 0px;
+            padding: 0;
+        }
+        
+        .barli_1 {
+            background: #999999;
+            height: 5px;
+            margin: 0px;
+            padding: 0;
+        }
+        
+        .barli {
+            background: #36b52a;
+            height: 5px;
+            margin: 0px;
+            padding: 0;
+        }
+        
+        #page {
+            width: 960px;
+            padding: 0 auto;
+            margin: 0 auto;
+            text-align: left;
+        }
+        
+        #header {
+            position: relative;
+            padding: 5px;
+        }
+        
+        .w_small {
+            font-family: Courier New;
+        }
+        
+        .w_number {
+            color: #f800fe;
+        }
+        
+        .sudu {
+            padding: 0;
+            background: #5dafd1;
+        }
+        
+        .suduk {
+            margin: 0px;
+            padding: 0;
+        }
+        
+        .resYes {}
+        
+        .resNo {
+            color: #FF0000;
+        }
+        
+        .word {
+            word-break: break-all;
+        }
+    </style>
+
+    <script language="JavaScript" type="text/javascript" rel="noreferrer" src="jquery.min.js"></script>
+
+    <script type="text/javascript">
+        function SetHTML(obj, value, success) {
+            if (value == '×') {
+                obj.html("<font color=red>" + value + "</font>");
+            } else {
+                obj.html(success);
+            }
+        }
+
+        function SetHTML_Font(obj, value) {
+            if (value == '×') {
+                obj.html("<font color=red>" + value + "</font>");
+            } else {
+                obj.html("<font color=green>" + value + "</font>");
+            }
+        }
+
+        function clone(obj) {
+            // Handle the 3 simple types, and null or undefined
+            if (null == obj || "object" != typeof obj) return obj;
+
+            // Handle Date
+            if (obj instanceof Date) {
+                var copy = new Date();
+                copy.setTime(obj.getTime());
+                return copy;
+            }
+
+            // Handle Array
+            if (obj instanceof Array) {
+                var copy = [];
+                for (var i = 0, len = obj.length; i < len; ++i) {
+                    copy[i] = clone(obj[i]);
+                }
+                return copy;
+            }
+
+            // Handle Object
+            if (obj instanceof Object) {
+                var copy = {};
+                for (var attr in obj) {
+                    if (obj.hasOwnProperty(attr)) {
+                        copy[attr] = clone(obj[attr]);
+                    }
+                }
+                return copy;
+            }
+
+            throw new Error("Unable to copy obj! Its type isn't supported.");
+        }
+
+        function ForDight(Dight, How) {
+            if (Dight < 0) {
+                var Last = 0 + "B/s";
+            } else if (Dight < 1024) {
+                var Last = Math.round(Dight * Math.pow(10, How)) / Math.pow(10, How) + "B";
+            } else if (Dight < 1048576) {
+                Dight = Dight / 1024;
+                var Last = Math.round(Dight * Math.pow(10, How)) / Math.pow(10, How) + "KB";
+            } else if (Dight < 1073741824) {
+                Dight = Dight / 1048576;
+                var Last = Math.round(Dight * Math.pow(10, How)) / Math.pow(10, How) + "MB";
+            } else {
+                Dight = Dight / 1073741824;
+                var Last = Math.round(Dight * Math.pow(10, How)) / Math.pow(10, How) + "GB";
+            }
+            return Last;
+        }
+        $(document).ready(function() {
+            $("[name=t_connections] [name=Ip]").html(global_cache.ip_span);
+            getServerConfigureData();
+            getServerConfigure();
+        });
+
+        function getServerConfigureData() {
+            $.getJSON('ServerConfigure.php?act=configure', function(dataJson) {
+                $("[name='w_configure'] [name]").each(function(i) {
+                    var name = $(this).attr('name');
+                    if (dataJson[name] == undefined) return;
+                    SetHTML_Font($(this), dataJson[name]);
+                });
+            });
+            $.getJSON('ServerConfigure.php?act=cpu_hardware', function(dataJson) {
+                $("[name='w_cpu'] [name]").each(function(i) {
+                    var name = $(this).attr('name');
+                    if (dataJson[name] == undefined) return;
+                    SetHTML_Font($(this), dataJson[name]);
+                });
+            });
+            $.getJSON('ServerConfigure.php?act=ulimit', function(dataJson) {
+                $("[name='t_ulimit'] [name]").each(function(i) {
+                    var name = $(this).attr('name');
+                    if (dataJson[name] == undefined) return;
+                    if (name == 'thread_stack_max') {
+                        SetHTML_Font($(this), ForDight(dataJson[name], 3));
+                    } else {
+                        SetHTML_Font($(this), dataJson[name]);
+                    }
+                });
+            });
+
+            $.getJSON('ServerConfigure.php?act=objects', function(dataJson) {
+                // console.log(dataJson);
+            });
+        }
+
+        var global_cache = {
+            'net': {},
+            'cpu': [],
+            'ip_span': "IP 接收包总数:<span name=InReceives></span> " +
+                "接收成功包数:<span name=InDelivers></span> " +
+                "已接收IP包组装段数:<span name=ReasmReqds></span> " +
+                "成功组装的IP包数:<span name=ReasmOKs></span> " +
+                "未成功组装的IP包数:<span name=ReasmFails></span>" +
+                "<br/>" +
+                "发送总数:<span name=OutRequests></span> " +
+                "请求分段的IP包数:<span name=FragCreates></span> " +
+                "成功分段的IP包数:<span name=FragOKs></span> " +
+                "未成功分段的IP包数:<span name=FragFails></span>" +
+                "<br/>" +
+                "包组装段最大等待时间:<span name=ReasmTimeout></span>",
+            'tcp_span': "TCP 主动连接数:<span name=ActiveOpens></span>" +
+                "被动连接数:<span name=PassiveOpens></span> " +
+                "连接失败数:<span name=AttemptFails></span> " +
+                "连接重置数:<span name=EstabResets></span> " +
+                "当前连接数:<span name=CurrEstab></span>" +
+                "<br/>" +
+                "接收分片数:<span name=InSegs></span> " +
+                "发送分片数:<span name=OutSegs></span> " +
+                "重传分片数:<span name=RetransSegs></span> " +
+                "接收错误数:<span name=InErrs></span> " +
+                "checksum错误包数量:<span name=InCsumErrors></span> " +
+                "RST重连数:<span name=OutRsts></span>",
+            'udp_span': "UDP 收包数:<span name=InDatagrams></span> " +
+                "未知端口收包数:<span name=NoPorts></span> " +
+                "收包错误数:<span name=InErrors></span> " +
+                "发包数:<span name=OutDatagrams></span> " +
+                "接收缓冲溢出包数:<span name=RcvbufErrors></span> " +
+                "发送缓冲溢出包数:<span name=SndbufErrors></span> " +
+                "checksum错误包数量:<span name=InCsumErrors></span>"
+        };
+
+        var global_process_stat = [
+            'D', //无法中断的休眠状态(通常 IO 的进程)
+            'R', //正在运行可中在队列中可过行的
+            'S', //处于休眠状态
+            'T', //停止或被追踪
+            'W', //进入内存交换(从内核2 .6 开始无效)
+            'X', //死掉的进程(很少見)
+            'Z', //僵尸进程
+            '<', //优先级高的进程
+            'N', //优先级较低的进程
+            'L', //一些页被锁进内存
+            's', //进程的领导者(存在子进程进程)
+            'l', //多进程(使用 CLONE_THREAD,类似 NPTL pthreads)
+            '+' //位于后台的进程组
+        ];
+
+        function getServerConfigure() {
+            $.getJSON('ServerConfigure.php?act=serverReal', function(dataJson) {
+                $("[name='w_real'] [name]").each(function(i) {
+                    var name = $(this).attr('name');
+                    if (dataJson[name] == undefined) return;
+                    SetHTML_Font($(this), dataJson[name]);
+                });
+            });
+
+            $.getJSON('ServerConfigure.php?act=net', function(dataJson) {
+                if (dataJson.length > 0) {
+                    for (var i = 0; i < dataJson.length; i++) {
+                        var data = dataJson[i];
+                        var lastData = global_cache.net[data.name];
+                        global_cache.net[data.name] = clone(data);
+
+                        if (lastData == undefined) {
+                            data.realin = 0;
+                            data.realout = 0;
+                        } else {
+                            data.realin = ((data.realin - lastData.realin) / 1024).toFixed(2);
+                            data.realout = ((data.realout - lastData.realout) / 1024).toFixed(2);
+                        }
+
+                        var element = $('[name=r_net]').find('[name=' + data.name + ']');
+                        if (element.length == 0) {
+                            var tr = document.createElement('tr');
+                            tr.innerHTML = '<td width="13%" name=' + data.name + '>' + data.name + ' : </td>' +
+                                '<td width="29%">入网: <font color="#CC0000"><span id="NetInput<?php echo $i?>" name=in>' + data.in + '</span></font></td>' +
+                                '<td width="14%">实时: <font color="#CC0000"><span id="NetInputSpeed"  name=realin></span>' + data.realin + '</font>kb/s</td>' +
+                                '<td width="29%">出网: <font color="#CC0000"><span id="NetOut<?php echo $i?>" name=out>' + data.out + '</font></td>' +
+                                '<td width="14%">实时: <font color="#CC0000"><span id="NetOutSpeed" name=realout></span>' + data.realout + '</font>kb/s</td>';
+
+                            $('[name=r_net]').append(tr);
+                        } else {
+                            element.parent().find('[name]').each(function(i) {
+                                var name = $(this).attr('name');
+                                if (data[name] == undefined) return;
+                                $(this).html(data[name]);
+                            })
+                        }
+                    }
+
+                }
+            });
+
+            $.getJSON('ServerConfigure.php?act=cpu_used', function(dataJson) {
+
+                var lastData = global_cache.cpu;
+                global_cache.cpu = clone(dataJson);
+                if (!(lastData instanceof Array)) return;
+                if (lastData.length <= 0) return;
+
+                if (dataJson.length > 0) {
+                    var parent = $("[name='w_cpu']");
+                    var state = parent.find('[name=state]');
+                    var lastRow = state.attr('rowspan');
+                    var row = lastRow;
+                    for (var i = 0; i < dataJson.length; i++) {
+                        last = lastData[i];
+                        data = dataJson[i];
+                        var total = 0;
+                        for (var item in data) {
+                            data[item] -= last[item];
+                            total += data[item];
+                        }
+                        for (var item in data) {
+                            data[item] = (data[item] * 100 / total).toFixed(0);
+                        }
+
+                        var element = parent.find('[name=cpu' + i + ']');
+                        if (element.length == 0) {
+                            var tr = document.createElement('tr');
+                            tr.innerHTML = "<td name=cpu" + i + ">" +
+                                "<span name=user></span>%us " +
+                                "<span name=nice></span>%ni " +
+                                "<span name=sys></span>%sy " +
+                                "<span name=idle></span>%id " +
+                                "<span name=iowait></span>%io " +
+                                "<span name=irq></span>%ir " +
+                                "<span name=softirq></span>%sf " +
+                                "</td>";
+                            parent.append(tr);
+                            row++;
+                            element = $(tr);
+                        }
+                        element.find('[name]').each(function(i) {
+                            var name = $(this).attr('name');
+                            if (data[name] == undefined) return;
+                            $(this).html(data[name]);
+                        })
+                    }
+                    if (row != lastRow) {
+                        state.attr('rowspan', row);
+                    }
+                }
+            });
+
+            $.getJSON('ServerConfigure.php?act=harddisk', function(dataJson) {
+                $("[name='t_disk'] [name]").each(function(i) {
+                    var name = $(this).attr('name');
+                    if (dataJson[name] == undefined) return;
+                    SetHTML_Font($(this), dataJson[name]);
+                    if (name == 'percent') {
+                        $(this).parent().find('[name=barpercent]').width(dataJson[name] + '%');
+                    }
+                });
+            });
+
+            $.getJSON('ServerConfigure.php?act=memory', function(dataJson) {
+                $("[name='t_memory'] [name]").each(function(i) {
+                    var name = $(this).attr('name');
+                    if (dataJson[name] == undefined) return;
+                    var data = dataJson[name];
+                    $(this).find('[name]').each(function(j) {
+                        var name = $(this).attr('name');
+                        if (data[name] == undefined) return;
+                        SetHTML_Font($(this), data[name]);
+                        if (name == 'percent') {
+                            $(this).parent().find('[name=barpercent]').width(data[name] + '%');
+                        }
+                    });
+                });
+            });
+
+            $.getJSON('ServerConfigure.php?act=loagavg', function(dataJson) {
+                $("[name='t_loadavg'] [name]").each(function(i) {
+                    var name = $(this).attr('name');
+                    if (dataJson[name] == undefined) return;
+                    SetHTML_Font($(this), dataJson[name]);
+                });
+            });
+
+            $.getJSON('ServerConfigure.php?act=connections', function(dataJson) {
+                var parent = $("[name='t_connections']");
+                var connections = $("[name='t_connections'] [name='connections']");
+                var row = connections.attr('rowspan');
+                var oldrow = row;
+
+                for (var i in dataJson) {
+                    var data = dataJson[i];
+                    var item = parent.find("[name=" + data['name'] + "]");
+                    if (item.length == 0) {
+                        var span = null;
+                        if (data['name'] == 'Tcp') {
+                            span = global_cache.tcp_span;
+                        } else if (data['name' == 'Ip']) {
+                            span = global_cache.ip_span;
+                        } else if (data['name'] == 'Udp') {
+                            span = global_cache.udp_span;
+                        }
+                        if (span != null) {
+                            parent.append("<tr><td name=" + data['name'] + ">" +
+                                span +
+                                "</td></tr>");
+                            item = parent.find("[name=" + data['name'] + "]");
+                            row++;
+                        }
+                    }
+                    if (item.length != 0) {
+                        item.find("[name]").each(function(i) {
+                            var name = $(this).attr('name');
+                            if (data[name] == undefined) return;
+                            SetHTML_Font($(this), data[name]);
+                        });
+                    }
+                }
+                if (row != oldrow) {
+                    connections.attr('rowspan', row);
+                }
+            });
+
+            // $.getJSON('ServerConfigure.php?act=socket', function(dataJson) {
+            //     console.log(dataJson);
+            // });
+
+            setTimeout("getServerConfigure()", 1000);
+        };
+    </script>
+</head>
+
+<body>
+    <a name="w_top"></a>
+    <div id="page">
+        <!--服务器相关参数-->
+
+        <table name='w_configure'>
+            <tr>
+                <th colspan="4">服务器参数</th>
+            </tr>
+            <tr>
+                <td>服务器域名/IP地址</td>
+                <td colspan="2">
+                    用户组:<span name=User></span> 域名:
+                    <span name=Domain></span> IP:
+                    <span name=IP></span> 端口:
+                    <span name=Port></span>
+                </td>
+                <td name='RemoteIP'></td>
+            </tr>
+
+            <tr>
+                <td>服务器标识</td>
+                <td colspan="3" name='ServerMark'></td>
+            </tr>
+
+            <tr>
+                <td width="13%">服务器操作系统</td>
+                <td width="37%" name=OSVersion></td>
+                <td width="13%">服务器解译引擎</td>
+                <td width="37%" name=Engine></td>
+            </tr>
+
+            <tr>
+                <td>服务器语言</td>
+                <td name=Language></td>
+                <td>服务器端口</td>
+                <td name=Port></td>
+            </tr>
+
+            <tr>
+                <td>服务器主机名</td>
+                <td name=Localdomain></td>
+                <td>绝对路径</td>
+                <td name=Root></td>
+            </tr>
+
+            <tr>
+                <td>管理员邮箱</td>
+                <td name=ServerAdmin></td>
+                <td>探针路径</td>
+                <td name=ScriptPath></td>
+            </tr>
+        </table>
+
+        <table name='w_real'>
+            <tr>
+                <th colspan="6">服务器实时数据</th>
+            </tr>
+            <tr>
+                <td width="13%">服务器当前时间</td>
+                <td width="37%" name=stime></td>
+                <td width="13%">服务器已运行时间</td>
+                <td width="37%" colspan="3" name=uptime></td>
+            </tr>
+        </table>
+
+        <table name='w_cpu'>
+            <tr>
+                <th colspan="3">服务器CPU实时数据</th>
+            </tr>
+            <tr>
+                <td width="13%">CPU型号 [<span name=num></span>核]</td>
+                <td width="87%" colspan=2><span name=model></span> | 频率: <span name=mhz></span> | 二级缓存: <span name=cache></span> | Bogomips: <span name=bogomips></span></td>
+            </tr>
+            <tr>
+                <td rowspan='1' name=state>CPU使用状况</td>
+                <td name=cpu0><span name=user>0</span>%us <span name=nice>0</span>%ni <span name=sys>0</span>%sy <span name=idle>0</span>%id <span name=iowait>0</span>%io <span name=irq>0</span>%ir <span name=softirq>0</span>%sf</td>
+            </tr>
+        </table>
+
+        <table name='t_disk'>
+            <tr>
+                <th colspan="6">服务器硬盘实时数据</th>
+            </tr>
+            <tr>
+                <td width="13%">硬盘使用状况</td>
+                <td>
+                    总空间 <span name=total></span>&nbsp;G， 已用
+                    <font color='#333333'><span id="useSpace" name=used></span></font>&nbsp;G， 空闲
+                    <font color='#333333'><span id="freeSpace" name=usable></span></font>&nbsp;G， 使用率 <span id="hdPercent" name=percent></span>%
+                    <div class="bar">
+                        <div id="barhdPercent" class="barli_black" style="width:0%" name=barpercent>&nbsp;</div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <table name='t_memory'>
+            <tr>
+                <th colspan="6">服务器内存实时数据</th>
+            </tr>
+            <tr>
+                <td rowspan=4 width="13%">内存使用状况</td>
+                <td name=mem>
+                    <div>
+                        物理内存：共
+                        <font color='#CC0000' name=total></font>
+                        , 已用
+                        <font color='#CC0000'><span id="UsedMemory" name=used><?php echo $mu;?></span></font>
+                        , 空闲
+                        <font color='#CC0000'><span id="FreeMemory" name=free><?php echo $mf;?></span></font>
+                        , 使用率
+                        <span id="memPercent" name=percent></span>%
+                        <div class="bar">
+                            <div id="barmemPercent" class="barli_green" style="width:0%" name=barpercent>&nbsp;</div>
+                        </div>
+                </td>
+                <tr>
+                    <td name=cache>
+                        <div>
+                            Cache化内存为 <span id="CachedMemory" name=used></span> , 使用率
+                            <span id="memCachedPercent" name=percent></span> % | Buffers缓冲为 <span id="Buffers" name=buf></span>
+                            <div class="bar">
+                                <div id="barmemCachedPercent" class="barli_blue" style="width:0%" name=barpercent>&nbsp;</div>
+                            </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td name=real>
+                        <div>
+                            真实内存使用
+                            <span id="memRealUsed" name=used></span> , 真实内存空闲
+                            <span id="memRealFree" name=free></span> , 使用率
+                            <span id="memRealPercent" name=percent></span> %
+                            <div class="bar_1">
+                                <div id="barmemRealPercent" class="barli_1" style="width:0%" name=barpercent>&nbsp;</div>
+                            </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td name=swap>
+                        <div>
+                            SWAP区：共
+                            <span name=total></span>,已使用
+                            <span id="swapUsed" name=used></span> , 空闲
+                            <span id="swapFree" name=free></span> , 使用率
+                            <span id="swapPercent" name=percent></span> %
+                            <div class="bar">
+                                <div id="barswapPercent" class="barli_red" style="width:0%" name=barpercent>&nbsp;</div>
+                            </div>
+                    </td>
+                </tr>
+
+        </table>
+
+        <table name='t_ulimit'>
+            <tr>
+                <th colspan="6">服务器系统限制</th>
+            </tr>
+            <tr>
+                <td width="13%" rowspan=4>系统限制</td>
+                <td colspan="5" class="w_number">
+                    PID最大值:<span name=pid_max></span> 进程最大值:
+                    <span name=process_max></span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5" class="w_number">
+                    线程栈大小:<span name=thread_stack_max></span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5" class="w_number">
+                    内核可分配最大文件描述符数:<span name=file_max_core></span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5" class="w_number">
+                    进程最大文件数:<span name=file_max_process></span> 进程最大文件数(硬):
+                    <span name=file_max_process_hard></span> 进程最大文件数(软):
+                    <span name=file_max_process_soft></span>
+                </td>
+            </tr>
+        </table>
+
+        <table name='t_loadavg'>
+            <tr>
+                <th colspan="6">服务器系统平均负载</th>
+            </tr>
+            <tr>
+                <td width="13%">系统平均负载</td>
+                <td colspan="5" class="w_number"><span id="loadAvg" name=loadAvg></span></td>
+            </tr>
+        </table>
+
+        <table name='t_connections'>
+            <tr>
+                <th colspan="6">服务器数据统计</th>
+            </tr>
+            <tr>
+                <td width="13%" rowspan=1 name=connections>统计</td>
+                <td name=Ip></td>
+            </tr>
+        </table>
+
+        <table name='r_net'>
+            <tr>
+                <th colspan="5">网络使用状况</th>
+            </tr>
+        </table>
+
+        <table>
+            <tr>
+                <td class="w_foot">
+                    <A HREF="http://www.Yahei.Net" target="_blank">转载自:雅黑PHP探针</A>
+                </td>
+                <td class="w_foot"></td>
+                <td class="w_foot"><a href="#w_top">返回顶部</a></td>
+            </tr>
+        </table>
+        </div>
+
+</body>
+
+</html>
