@@ -227,6 +227,7 @@
     </style>
 
     <script language="JavaScript" type="text/javascript" rel="noreferrer" src="jquery.min.js"></script>
+    <script language="JavaScript" type="text/javascript" rel="noreferrer" src="radialIndicator.js"></script>
 
     <script type="text/javascript">
         function SetHTML(obj, value, success) {
@@ -329,9 +330,9 @@
                 });
             });
 
-            $.getJSON('ServerConfigure.php?act=objects', function(dataJson) {
-                // console.log(dataJson);
-            });
+            // $.getJSON('ServerConfigure.php?act=process', function(dataJson) {
+            // console.log(dataJson);
+            // });
         }
 
         var global_cache = {
@@ -385,6 +386,38 @@
             'l', //多进程(使用 CLONE_THREAD,类似 NPTL pthreads)
             '+' //位于后台的进程组
         ];
+
+        var default_barColor = {        
+            0: '#33CC33',
+            33: '#0066FF',
+            66: '#FFFF00',
+            100: '#FF0000'
+        };
+        var reverse_barColor = {        
+            0: '#FF0000',
+            33: '#FFFF00',
+            66: '#0066FF',
+            100: '#33CC33'
+        };
+
+        var red_barColor = {
+            0: '#880000',
+            33: '#AA0000',
+            66: '#CC0000',
+            100: '#FF0000'
+        };
+
+        var global_static_cpu_table = {
+            cpu: {
+                user: default_barColor,
+                nice: red_barColor,
+                sys: default_barColor,
+                idle: reverse_barColor,
+                iowait: red_barColor,
+                irq: red_barColor,
+                softirq: red_barColor
+            }
+        };
 
         function getServerConfigure() {
             $.getJSON('ServerConfigure.php?act=serverReal', function(dataJson) {
@@ -459,14 +492,14 @@
                         var element = parent.find('[name=cpu' + i + ']');
                         if (element.length == 0) {
                             var tr = document.createElement('tr');
-                            tr.innerHTML = "<td name=cpu" + i + ">" +
-                                "<span name=user></span>%us " +
-                                "<span name=nice></span>%ni " +
-                                "<span name=sys></span>%sy " +
-                                "<span name=idle></span>%id " +
-                                "<span name=iowait></span>%io " +
-                                "<span name=irq></span>%ir " +
-                                "<span name=softirq></span>%sf " +
+                            tr.innerHTML = "<td name=cpu" + i + " stype='display:inline;'>" +
+                                "<span><div name=user></div></span>" +
+                                "<span><div name=nice></div></span>" +
+                                "<span><div name=sys></div></span>" +
+                                "<span><div name=idle></div></span>" +
+                                "<span><div name=iowait></div></span>" +
+                                "<span><div name=irq></div></span>" +
+                                "<span><div name=softirq></div></span>" +
                                 "</td>";
                             parent.append(tr);
                             row++;
@@ -475,7 +508,19 @@
                         element.find('[name]').each(function(i) {
                             var name = $(this).attr('name');
                             if (data[name] == undefined) return;
-                            $(this).html(data[name]);
+                            $(this).radialIndicatorObject({
+                                barColor: global_static_cpu_table.cpu[name],
+                                radius: 30,
+                                barBgWidth: 2,
+                                barWidth: 3,
+                                roundCorner: false,
+                                maxValue: 100,
+                                defaultValue: data[name],
+                                value: data[name],
+                                fontSize: 10,
+                                text: name,
+                                textSize: 8,
+                            }).value(data[name]);
                         })
                     }
                     if (row != lastRow) {
@@ -643,7 +688,15 @@
             </tr>
             <tr>
                 <td rowspan='1' name=state>CPU使用状况</td>
-                <td name=cpu0><span name=user>0</span>%us <span name=nice>0</span>%ni <span name=sys>0</span>%sy <span name=idle>0</span>%id <span name=iowait>0</span>%io <span name=irq>0</span>%ir <span name=softirq>0</span>%sf</td>
+                <td name=cpu0>
+                    <div name=user></div>
+                    <div name=nice></div>
+                    <div name=sys></div>
+                    <div name=idle></div>
+                    <div name=iowait></div>
+                    <div name=irq></div>
+                    <div name=softirq></div>
+                </td>
             </tr>
         </table>
 

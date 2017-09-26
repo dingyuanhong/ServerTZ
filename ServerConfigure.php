@@ -747,7 +747,7 @@ else if($_GET['act'] == "connections")
 	@header("content-Type: text/json; charset=utf-8"); //语言强制
 	echo json_encode(GetConnections());
 }
-else if($_GET['act'] == "objects")
+else if($_GET['act'] == "process")
 {
 	@header("content-Type: text/json; charset=utf-8"); //语言强制
 	echo json_encode(GetProcessInfo());
