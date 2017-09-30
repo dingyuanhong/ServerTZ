@@ -10,7 +10,7 @@
         * {
             font-family: "Microsoft Yahei", Tahoma, Arial;
         }
-        
+
         body {
             text-align: center;
             margin: 0 auto;
@@ -19,7 +19,7 @@
             font-size: 12px;
             font-family: Tahoma, Arial
         }
-        
+
         h1 {
             font-size: 26px;
             padding: 0;
@@ -27,23 +27,23 @@
             color: #333333;
             font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
         }
-        
+
         h1 small {
             font-size: 11px;
             font-family: Tahoma;
             font-weight: bold;
         }
-        
+
         a {
             color: #666;
             text-decoration: none;
         }
-        
+
         a.black {
             color: #000000;
             text-decoration: none;
         }
-        
+
         table {
             width: 100%;
             clear: both;
@@ -56,7 +56,7 @@
             -webkit-box-shadow: 1px 1px 1px #CCC;
             -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=2, Direction=135, Color='#CCCCCC')";
         }
-        
+
         th {
             padding: 3px 6px;
             font-weight: bold;
@@ -65,17 +65,17 @@
             border: 1px solid #cccccc;
             text-align: left;
         }
-        
+
         tr {
             padding: 0;
             background: #FFFFFF;
         }
-        
+
         td {
             padding: 3px 6px;
             border: 1px solid #CCCCCC;
         }
-        
+
         .w_logo {
             height: 25px;
             text-align: center;
@@ -83,23 +83,23 @@
             FONT-SIZE: 15px;
             width: 13%;
         }
-        
+
         .w_top {
             height: 25px;
             text-align: center;
             width: 8.7%;
         }
-        
+
         .w_top:hover {
             background: #dadada;
         }
-        
+
         .w_foot {
             height: 25px;
             text-align: center;
             background: #dedede;
         }
-        
+
         input {
             padding: 2px;
             background: #FFFFFF;
@@ -109,7 +109,7 @@
             border-bottom: 1px solid #CCCCCC;
             font-size: 12px
         }
-        
+
         input.btn {
             font-weight: bold;
             height: 20px;
@@ -120,7 +120,7 @@
             border: 1px solid #999;
             font-size: 12px
         }
-        
+
         .bar {
             border: 1px solid #999999;
             background: #FFFFFF;
@@ -131,7 +131,7 @@
             padding: 1px;
             overflow: hidden;
         }
-        
+
         .bar_1 {
             border: 1px dotted #999999;
             background: #FFFFFF;
@@ -142,88 +142,92 @@
             padding: 1px;
             overflow: hidden;
         }
-        
+
         .barli_red {
             background: #ff6600;
             height: 5px;
             margin: 0px;
             padding: 0;
         }
-        
+
         .barli_blue {
             background: #0099FF;
             height: 5px;
             margin: 0px;
             padding: 0;
         }
-        
+
         .barli_green {
             background: #36b52a;
             height: 5px;
             margin: 0px;
             padding: 0;
         }
-        
+
         .barli_black {
             background: #333;
             height: 5px;
             margin: 0px;
             padding: 0;
         }
-        
+
         .barli_1 {
             background: #999999;
             height: 5px;
             margin: 0px;
             padding: 0;
         }
-        
+
         .barli {
             background: #36b52a;
             height: 5px;
             margin: 0px;
             padding: 0;
         }
-        
+
         #page {
             width: 960px;
             padding: 0 auto;
             margin: 0 auto;
             text-align: left;
         }
-        
+
         #header {
             position: relative;
             padding: 5px;
         }
-        
+
         .w_small {
             font-family: Courier New;
         }
-        
+
         .w_number {
             color: #f800fe;
         }
-        
+
         .sudu {
             padding: 0;
             background: #5dafd1;
         }
-        
+
         .suduk {
             margin: 0px;
             padding: 0;
         }
-        
+
         .resYes {}
-        
+
         .resNo {
             color: #FF0000;
         }
-        
+
         .word {
             word-break: break-all;
         }
+
+	.rank{
+		display:inline;
+	}
     </style>
 
     <script language="JavaScript" type="text/javascript" rel="noreferrer" src="jquery.min.js"></script>
@@ -338,6 +342,13 @@
         var global_cache = {
             'net': {},
             'cpu': [],
+	    'cpu_span':"<span><div name=user class=rank></div></span>" +
+		    "<span><div name=nice class=rank></div></span>" +
+		    "<span><div name=sys class=rank></div></span>" +
+		    "<span><div name=idle class=rank></div></span>" +
+		    "<span><div name=iowait class=rank></div></span>" +
+		    "<span><div name=irq class=rank></div></span>" +
+		    "<span><div name=softirq class=rank></div></span>",
             'ip_span': "IP 接收包总数:<span name=InReceives></span> " +
                 "接收成功包数:<span name=InDelivers></span> " +
                 "已接收IP包组装段数:<span name=ReasmReqds></span> " +
@@ -492,14 +503,8 @@
                         var element = parent.find('[name=cpu' + i + ']');
                         if (element.length == 0) {
                             var tr = document.createElement('tr');
-                            tr.innerHTML = "<td name=cpu" + i + " stype='display:inline;'>" +
-                                "<span><div name=user></div></span>" +
-                                "<span><div name=nice></div></span>" +
-                                "<span><div name=sys></div></span>" +
-                                "<span><div name=idle></div></span>" +
-                                "<span><div name=iowait></div></span>" +
-                                "<span><div name=irq></div></span>" +
-                                "<span><div name=softirq></div></span>" +
+                            tr.innerHTML = "<td name=cpu" + i + ">" +
+			    	global_cache.cpu_span +
                                 "</td>";
                             parent.append(tr);
                             row++;
@@ -688,15 +693,6 @@
             </tr>
             <tr>
                 <td rowspan='1' name=state>CPU使用状况</td>
-                <td name=cpu0>
-                    <div name=user></div>
-                    <div name=nice></div>
-                    <div name=sys></div>
-                    <div name=idle></div>
-                    <div name=iowait></div>
-                    <div name=irq></div>
-                    <div name=softirq></div>
-                </td>
             </tr>
         </table>
 
