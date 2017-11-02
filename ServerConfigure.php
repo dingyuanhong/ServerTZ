@@ -402,6 +402,7 @@ function GetConnections()
 	#/proc/net/snmp
 	if (false !== ($strs = @file("/proc/net/snmp")))
 	{
+		$index = 0;
 		for ($i = 0; $i < count($strs); $i++ )
 		{
 			preg_match_all( "/[^ \:\f\n\r\t\v]+/", $strs[$i], $infoHeader );
@@ -521,7 +522,7 @@ function GetProcessFD($pid)
 	{
 		$total -= 1;
 	}
-	
+
 	$socket = intval($socket);
 	$Configure = (object)array();
 	$Configure->total = $total;
@@ -570,7 +571,7 @@ function GetSocketFD()
 			$result->$name =  $ret;
 		}
 	}
-	
+
 	return $result;
 }
 
@@ -589,7 +590,7 @@ function GetProcessInfo()
 			if($pid == 'PID') continue;
 
 			$pid = intval($pid);
-			
+
 			$process = (object)array();
 			$process->user = $info[0][0];
 			$process->pid = $pid;
@@ -604,7 +605,7 @@ function GetProcessInfo()
 			$size = count($info[0]);
 			$param = '';
 			if($size > 11)
-			{	
+			{
 				for($j = 11; $j < $size;$j++)
 				{
 					if($param != '')
@@ -617,10 +618,10 @@ function GetProcessInfo()
 			if ($param != ''){
 				$process->param = $param;
 			}
-			
+
 			$fd = GetProcessFD($pid);
 			$process->fd = $fd;
-			
+
 			$Configure[$index] = $process;
 			$index++;
 		}
@@ -636,7 +637,7 @@ function GetUlimit()
 {
 	#$cmd = 'ulimit -a';
 	#$total = exec($cmd,$strs);
-	
+
 	#PID最大数
 	$cmd = 'cat /proc/sys/kernel/pid_max';
 	$total = exec($cmd,$strs);
@@ -651,7 +652,7 @@ function GetUlimit()
 	$cmd = 'ulimit -s';
 	$total = exec($cmd,$strs);
 	$thread_stack_max = intval($total)*1024;
-	
+
 	#内核可分配最大文件描述符
 	$cmd = 'cat /proc/sys/fs/file-max';
 	$total = exec($cmd,$strs);
@@ -700,7 +701,13 @@ function myException($exception)
 
 set_exception_handler('myException');
 
-ob_start('ob_gzhandler');
+if(function_exists('ob_gzhandler'))
+{
+	ob_start('ob_gzhandler');
+}else{
+	ob_start();
+}
+
 #php信息
 if ($_GET['act'] == "configure")
 {
