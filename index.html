@@ -449,19 +449,65 @@
                         if (lastData == undefined) {
                             data.realin = 0;
                             data.realout = 0;
+							data.realintype = 'kb/s';
+                            data.realouttype = 'kb/s';
                         } else {
-                            data.realin = ((data.realin - lastData.realin) / 1024).toFixed(2);
-                            data.realout = ((data.realout - lastData.realout) / 1024).toFixed(2);
+							var realin = data.realin - lastData.realin;
+							var realout = data.realout - lastData.realout;
+							var gb = 1024*1024*1024;
+							var mb = 1024*1024;
+							var kb = 1024;
+							if(realin >= gb)
+							{
+								data.realin = ((realin) / gb).toFixed(2);
+								data.realintype = 'gb/s';
+							}
+							else if(realin >= mb)
+							{
+								data.realin = ((realin) / mb).toFixed(2);
+								data.realintype = 'mb/s';
+							}
+							else if(realin >= kb)
+							{
+								data.realin = ((realin) / kb).toFixed(2);
+								data.realintype = 'kb/s';
+							}
+							else
+							{
+								data.realin = ((realin)).toFixed(2);
+								data.realintype = 'b/s';
+							}
+							if(realout >= gb)
+							{
+								data.realout = ((realout) / gb).toFixed(2);
+								data.realouttype = 'gb/s';
+							}
+							else if(realout >= mb)
+							{
+								data.realout = ((realout) / mb).toFixed(2);
+								data.realouttype = 'mb/s';
+							}
+							else if(realout >= kb)
+							{
+								data.realout = ((realout) / kb).toFixed(2);
+								data.realouttype = 'kb/s';
+							}
+							else
+							{
+								data.realout = ((realout)).toFixed(2);
+								data.realouttype = 'b/s';
+							}
+
                         }
 
                         var element = $('[name=r_net]').find('[name=' + data.name + ']');
                         if (element.length == 0) {
                             var tr = document.createElement('tr');
                             tr.innerHTML = '<td width="13%" name=' + data.name + '>' + data.name + ' : </td>' +
-                                '<td width="29%">入网: <font color="#CC0000"><span id="NetInput<?php echo $i?>" name=in>' + data.in + '</span></font></td>' +
-                                '<td width="14%">实时: <font color="#CC0000"><span id="NetInputSpeed"  name=realin></span>' + data.realin + '</font>kb/s</td>' +
-                                '<td width="29%">出网: <font color="#CC0000"><span id="NetOut<?php echo $i?>" name=out>' + data.out + '</font></td>' +
-                                '<td width="14%">实时: <font color="#CC0000"><span id="NetOutSpeed" name=realout></span>' + data.realout + '</font>kb/s</td>';
+                                '<td width="29%">入网: <font color="#CC0000"><span name=in>' + data.in + '</span></font></td>' +
+                                '<td width="14%">实时: <font color="#CC0000"><span name=realin>' + data.realin + '</span></font><font color="#CC0000" name=realintype>' + data.realintype + '</font></td>' +
+                                '<td width="29%">出网: <font color="#CC0000"><span name=out>' + data.out + '</font></td>' +
+                                '<td width="14%">实时: <font color="#CC0000"><span name=realout>' + data.realout + '</span></font><font color="#CC0000" name=realouttype>' + data.realouttype + '</font></td>';
 
                             $('[name=r_net]').append(tr);
                         } else {
