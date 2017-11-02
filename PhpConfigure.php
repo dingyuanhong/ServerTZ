@@ -30,13 +30,19 @@ function GetPHPConfigure()
 	$Configure = (object)array();
 
 	#脚本文件名称
-	$phpSelf = $_SERVER[PHP_SELF] ? $_SERVER[PHP_SELF] : $_SERVER[SCRIPT_NAME];
+	$phpSelf = $_SERVER['PHP_SELF'] ? $_SERVER['PHP_SELF'] : $_SERVER['SCRIPT_NAME'];
 	#禁用函数列表
 	$disable_functions=get_cfg_var("disable_functions");
 	$default_functions=get_defined_functions();
 
 	#检查phpinfo是否被禁用
-	$Configure->phpinfo = (false!==eregi("phpinfo",$disable_functions))? '×':'√';
+	if(isfunction('eregi'))
+	{
+		$Configure->phpinfo = (false!==eregi("phpinfo",$disable_functions))? '×':'√';
+	}else{
+		$Configure->phpinfo = isfunction("phpinfo");
+	}
+
 	#php版本
 	$Configure->php_version = PHP_VERSION;
 	#运行方式
@@ -147,7 +153,7 @@ function GetPHPAssembly()
 	#允许URL打开文件
 	$Configure->allow_url_fopen = GetCFG("allow_url_fopen");
 	#GD库支持
-	if(function_exists(gd_info)) {
+	if(function_exists('gd_info')) {
 		$gd_info = @gd_info();
 		$Configure->gd = $gd_info["GD Version"];
 	}else{
@@ -269,7 +275,7 @@ function GetPHPDB()
 	if(extension_loaded('sqlite3')) {
 		$sqliteVer = SQLite3::version();
 		$Configure->SQLite =  '√';
-		$Configure->SQLiteVersion = $sqliteVer[versionString];
+		$Configure->SQLiteVersion = $sqliteVer['versionString'];
 	}else {
 		$Configure->SQLite =  isfunction("sqlite_close");
 		if(isfunction("sqlite_close") == '√') {
