@@ -657,7 +657,15 @@ function GetUlimit()
 	$cmd = 'cat /proc/sys/fs/file-max';
 	$total = exec($cmd,$strs);
 	$core_file_max = intval($total);
-
+	
+	#内核当前分配的文件描述符
+	$cmd = 'cat /proc/sys/fs/file-nr';
+	$total = exec($cmd,$strs);
+	$arr = explode(" ", $total);
+	$allicated_file = intval($arr[0]);
+	$allocated_unused_file = intval($arr[1]);
+	$allocated_max_file = intval($arr[2]);
+	
 	#单进程最大文件数
 	$cmd = 'cat /proc/sys/fs/nr_open';
 	$total = exec($cmd,$strs);
@@ -680,6 +688,8 @@ function GetUlimit()
 	$Configure->file_max_process = $process_file_max;
 	$Configure->file_max_process_hard = $process_file_hard_max;
 	$Configure->file_max_process_soft = $process_file_soft_max;
+	$Configure->file_allocated = $allicated_file;
+	$Configure->file_allocated_unused = $allocated_unused_file;
 	return $Configure;
 }
 
