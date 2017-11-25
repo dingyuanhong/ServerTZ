@@ -717,7 +717,47 @@
                 <td name=ScriptPath></td>
             </tr>
         </table>
+		
+		<table name='t_ulimit'>
+            <tr>
+                <th colspan="6">服务器系统限制</th>
+            </tr>
+            <tr>
+                <td width="13%" rowspan=4>系统限制</td>
+                <td colspan="5" class="w_number">
+                    PID最大值:<span name=pid_max></span> 进程最大值:
+                    <span name=process_max></span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5" class="w_number">
+                    线程栈大小:<span name=thread_stack_max></span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5" class="w_number">
+                    内核可分配最大文件描述符数:<span name=file_max_core></span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5" class="w_number">
+                    进程最大文件数:<span name=file_max_process></span> 进程最大文件数(硬):
+                    <span name=file_max_process_hard></span> 进程最大文件数(软):
+                    <span name=file_max_process_soft></span>
+                </td>
+            </tr>
+        </table>
 
+        <table name='t_loadavg'>
+            <tr>
+                <th colspan="6">服务器系统平均负载</th>
+            </tr>
+            <tr>
+                <td width="13%">系统平均负载</td>
+                <td colspan="5" class="w_number"><span id="loadAvg" name=loadAvg></span></td>
+            </tr>
+        </table>
+		
         <table name='w_real'>
             <tr>
                 <th colspan="6">服务器实时数据</th>
@@ -816,46 +856,6 @@
                     </td>
                 </tr>
 
-        </table>
-
-        <table name='t_ulimit'>
-            <tr>
-                <th colspan="6">服务器系统限制</th>
-            </tr>
-            <tr>
-                <td width="13%" rowspan=4>系统限制</td>
-                <td colspan="5" class="w_number">
-                    PID最大值:<span name=pid_max></span> 进程最大值:
-                    <span name=process_max></span>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="5" class="w_number">
-                    线程栈大小:<span name=thread_stack_max></span>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="5" class="w_number">
-                    内核可分配最大文件描述符数:<span name=file_max_core></span>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="5" class="w_number">
-                    进程最大文件数:<span name=file_max_process></span> 进程最大文件数(硬):
-                    <span name=file_max_process_hard></span> 进程最大文件数(软):
-                    <span name=file_max_process_soft></span>
-                </td>
-            </tr>
-        </table>
-
-        <table name='t_loadavg'>
-            <tr>
-                <th colspan="6">服务器系统平均负载</th>
-            </tr>
-            <tr>
-                <td width="13%">系统平均负载</td>
-                <td colspan="5" class="w_number"><span id="loadAvg" name=loadAvg></span></td>
-            </tr>
         </table>
 
         <table name='t_connections'>
