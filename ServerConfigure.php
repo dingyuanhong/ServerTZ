@@ -270,6 +270,11 @@ function GetMemory()
 
 	$sysInfo = $res;
 
+	$mem = (object)array();
+	$cache = (object)array();
+	$swap = (object)array();
+	$real = (object)array();
+
 	//判断内存如果小于1G，就显示M，否则显示G单位
 	if($sysInfo['memTotal']<1024)
 	{
