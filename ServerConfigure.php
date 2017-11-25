@@ -448,7 +448,7 @@ function GetNetworkCard($name)
 {
 	$cmd = 'ethtool '. $name;
 	$result = exec($cmd,$strs);
-	echo $result;
+
 	$ret = (object)array();
 	for ($i = 0; $i < count($strs); $i++ )
 	{
