@@ -362,17 +362,18 @@
                 "<br/>" +
                 "包组装段最大等待时间:<span name=ReasmTimeout></span>",
             'tcp_span': "TCP 主动连接数:<span name=ActiveOpens></span>" +
+				"当前连接数:<span name=CurrEstab></span>" +
+				"<br/>" +
                 "被动连接数:<span name=PassiveOpens></span> " +
                 "连接失败数:<span name=AttemptFails></span> " +
                 "连接重置数:<span name=EstabResets></span> " +
-                "当前连接数:<span name=CurrEstab></span>" +
+				"RST重连数:<span name=OutRsts></span>" +
                 "<br/>" +
                 "接收分片数:<span name=InSegs></span> " +
                 "发送分片数:<span name=OutSegs></span> " +
                 "重传分片数:<span name=RetransSegs></span> " +
                 "接收错误数:<span name=InErrs></span> " +
-                "checksum错误包数量:<span name=InCsumErrors></span> " +
-                "RST重连数:<span name=OutRsts></span>",
+                "checksum错误包数量:<span name=InCsumErrors></span> ",
             'udp_span': "UDP 收包数:<span name=InDatagrams></span> " +
                 "未知端口收包数:<span name=NoPorts></span> " +
                 "收包错误数:<span name=InErrors></span> " +
