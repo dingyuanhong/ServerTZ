@@ -13,6 +13,7 @@ function formatsize($size)
 {
 	$danwei=array(' B ',' K ',' M ',' G ',' T ');
 	$allsize=array();
+	$allsize1 = array();
 	$i=0;
 	for($i = 0; $i <5; $i++)
 	{
@@ -22,11 +23,16 @@ function formatsize($size)
 	for($l = $i-1; $l >=0; $l--)
 	{
 		$allsize1[$l]=floor($size/pow(1024,$l));
-		$allsize[$l]=$allsize1[$l]-$allsize1[$l+1]*1024;
+		if($l+1 >= $i)
+		{
+			$allsize[$l] = $allsize1[$l];
+		}else{
+			$allsize[$l]=$allsize1[$l]-$allsize1[$l+1]*1024;	
+		}
 	}
 
 	$len=count($allsize);
-
+	$fsize  = '';
 	for($j = $len-1; $j >=0; $j--)
 	{
 		$fsize=$fsize.$allsize[$j].$danwei[$j];
