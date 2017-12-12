@@ -673,7 +673,7 @@ function GetUlimit()
 	$cmd = 'cat /proc/sys/fs/file-nr';
 	$total = exec($cmd,$strs);
 	$arr = explode(" ", $total);
-	$allicated_file = intval($arr[0]);
+	$allocated_file = intval($arr[0]);
 	$allocated_unused_file = intval($arr[1]);
 	$allocated_max_file = intval($arr[2]);
 	
@@ -699,7 +699,7 @@ function GetUlimit()
 	$Configure->file_max_process = $process_file_max;
 	$Configure->file_max_process_hard = $process_file_hard_max;
 	$Configure->file_max_process_soft = $process_file_soft_max;
-	$Configure->file_allocated = $allicated_file;
+	$Configure->file_allocated = $allocated_file;
 	$Configure->file_allocated_unused = $allocated_unused_file;
 	return $Configure;
 }
