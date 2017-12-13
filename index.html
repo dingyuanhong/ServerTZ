@@ -539,11 +539,11 @@
                         last = lastData[i];
                         data = dataJson[i];
                         var total = 0;
-                        for (var item in data) {
+                        for (var item in global_static_cpu_table.cpu) {
                             data[item] -= last[item];
                             total += data[item];
                         }
-                        for (var item in data) {
+                        for (var item in global_static_cpu_table.cpu) {
                             data[item] = (data[item] * 100 / total).toFixed(0);
                         }
 
